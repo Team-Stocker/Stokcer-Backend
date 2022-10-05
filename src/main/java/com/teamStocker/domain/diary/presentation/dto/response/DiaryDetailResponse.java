@@ -7,20 +7,20 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class DiaryResponse {
-
-    private Long id;
+public class DiaryDetailResponse {
 
     private String title;
+
+    private String content;
 
     private Category category;
 
     private int rate;
 
-    public static DiaryResponse of(Diary diary) {
-        return DiaryResponse.builder()
-                .id(diary.getId())
+    public static DiaryDetailResponse of(Diary diary) {
+        return DiaryDetailResponse.builder()
                 .title(diary.getTitle())
+                .content(diary.getContent())
                 .category(diary.getCategory())
                 .rate(diary.getRate())
                 .build();

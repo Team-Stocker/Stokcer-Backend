@@ -1,6 +1,7 @@
 package com.teamStocker.domain.diary.presentation;
 
 import com.teamStocker.domain.diary.presentation.dto.request.CreateDiaryRequest;
+import com.teamStocker.domain.diary.presentation.dto.response.DiaryDetailResponse;
 import com.teamStocker.domain.diary.presentation.dto.response.DiaryResponse;
 import com.teamStocker.domain.diary.service.DiaryService;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,10 @@ public class DiaryController {
     @GetMapping
     public List<DiaryResponse> findAllDiary() {
         return diaryService.findAllDiary();
+    }
+
+    @GetMapping("/{id}")
+    public DiaryDetailResponse findDiaryDetail(@PathVariable Long id) {
+        return diaryService.findDiaryDetail(id);
     }
 }
