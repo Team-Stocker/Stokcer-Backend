@@ -18,6 +18,6 @@ public class LikeController {
 
     @DeleteMapping
     public void deleteLike(@PathVariable Long id) {
-        likeService.deleteLiek(id);
+        likeService.deleteLike(id);
     }
 }
