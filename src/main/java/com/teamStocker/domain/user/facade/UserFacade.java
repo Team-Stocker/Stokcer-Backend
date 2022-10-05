@@ -5,7 +5,9 @@ import com.teamStocker.domain.user.domain.repository.UserRepository;
 import com.teamStocker.domain.user.exception.PasswordMismatchException;
 import com.teamStocker.domain.user.exception.UserAlreadyExistsException;
 import com.teamStocker.domain.user.exception.UserNotFoundException;
+import com.teamStocker.global.security.auth.AuthDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -31,5 +33,10 @@ public class UserFacade {
         if (userRepository.existsByEmail(email) || userRepository.existsByNickName(nickName)) {
             throw UserAlreadyExistsException.EXCEPTION;
         }
+    }
+
+    public User getCurrentUser() {
+        AuthDetails auth = (AuthDetails) SecurityContextHolder.getContext().getAuthentication();
+        return findUserByEmail(auth.getUsername());
     }
 }
