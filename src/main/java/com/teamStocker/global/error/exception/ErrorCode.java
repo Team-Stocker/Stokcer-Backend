@@ -21,6 +21,7 @@ public enum ErrorCode {
     CODE_MISMATCH(401, "코드가 틀렸습니다."),
     EXPIRED_DATA(401, "만료된 데이터입니다."),
     ALREADY_LOGOUT(401, "로그아웃된 유저입니다."),
+    DIARY_NOT_FOUND( 404, "일기를 찾을 수 없습니다."),
     ;
 
     private final int status;

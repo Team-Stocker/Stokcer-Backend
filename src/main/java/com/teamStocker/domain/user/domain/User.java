@@ -1,5 +1,6 @@
 package com.teamStocker.domain.user.domain;
 
+import com.teamStocker.domain.diary.domain.Diary;
 import com.teamStocker.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -7,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -15,6 +18,7 @@ import javax.persistence.*;
 public class User extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     @Column(name = "profile_img")
@@ -31,6 +35,9 @@ public class User extends BaseTimeEntity {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Diary> diaries = new ArrayList<>();
 
     @Builder
     public User (String profileImg, String name, String nickName, String email, String password) {
