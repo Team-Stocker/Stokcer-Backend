@@ -17,12 +17,15 @@ public class DiaryDetailResponse {
 
     private int rate;
 
+    private int numberOfLikes;
+
     public static DiaryDetailResponse of(Diary diary) {
         return DiaryDetailResponse.builder()
                 .title(diary.getTitle())
                 .content(diary.getContent())
                 .category(diary.getCategory())
                 .rate(diary.getRate())
+                .numberOfLikes(diary.getLikes().size())
                 .build();
     }
 }
