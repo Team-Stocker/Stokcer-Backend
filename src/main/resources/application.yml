@@ -1,4 +1,5 @@
 spring:
+<<<<<<< HEAD
   servlet:
     multipart:
       max-file-size: 5MB
@@ -52,3 +53,31 @@ logging:
       amazonaws:
         util:
           EC2MetadataUtils: error
+=======
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/stocker_db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: stocker
+    password: 1234
+
+  redis:
+    host: localhost
+    port: 6379
+
+  jwt:
+    secret: aGVsbG9Xb3JsZElzTXlMaWZlQmVjdWFzZU15TGlmZVNPR29vZEJlY2F1c2VGdWNrWW91U2h1dFVw
+
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+>>>>>>> main
