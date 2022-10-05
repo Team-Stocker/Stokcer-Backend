@@ -1,6 +1,7 @@
 package com.teamStocker.domain.user.domain;
 
 import com.teamStocker.domain.diary.domain.Diary;
+import com.teamStocker.domain.diary.domain.Like;
 import com.teamStocker.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -38,6 +39,9 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Diary> diaries = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Like> likes = new ArrayList<>();
 
     @Builder
     public User (String profileImg, String name, String nickName, String email, String password) {
