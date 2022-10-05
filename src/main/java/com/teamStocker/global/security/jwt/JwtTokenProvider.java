@@ -24,7 +24,7 @@ public class JwtTokenProvider {
 
     private final RedisService redisService;
 
-    @Value("${spring.jwt.secret}")
+    @Value("${jwt.secret}")
     private String SECRET_KEY;
 
     private Key getSigningKey(String secretKey) {
