@@ -21,6 +21,7 @@ public class BusinessExceptionHandler {
         log.error("errorCode: {}, url: {}, message: {}",
                 e.getErrorCode(), request.getRequestURI(), e.getMessage());
 
+        e.printStackTrace();
         return ErrorResponse.builder()
                 .status(e.getErrorCode().getStatus())
                 .message(e.getMessage())
