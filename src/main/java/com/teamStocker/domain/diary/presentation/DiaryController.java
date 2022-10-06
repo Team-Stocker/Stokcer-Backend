@@ -55,7 +55,7 @@ public class DiaryController {
     }
 
     @Operation(summary = "일기 카테코리 별로 조회하기")
-    @GetMapping
+    @GetMapping("/category")
     public List<DiaryResponse> findAllDiaryByCategory(@RequestParam Category category) {
         return diaryService.findAllDiaryByCategory(category);
     }
