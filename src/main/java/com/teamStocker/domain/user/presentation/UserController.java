@@ -1,14 +1,12 @@
 package com.teamStocker.domain.user.presentation;
 
 import com.teamStocker.domain.user.presentation.dto.request.CreateUserRequest;
+import com.teamStocker.domain.user.presentation.dto.response.MyPageResponse;
 import com.teamStocker.domain.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -24,5 +22,11 @@ public class UserController {
     @PostMapping
     public void signUp(@RequestBody @Valid CreateUserRequest request) {
         userService.signUp(request);
+    }
+
+    @Operation(summary = "마이 페이지")
+    @GetMapping
+    public MyPageResponse findMyPage() {
+        return userService.findMyPage();
     }
 }

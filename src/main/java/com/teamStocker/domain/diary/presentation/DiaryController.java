@@ -1,5 +1,6 @@
 package com.teamStocker.domain.diary.presentation;
 
+import com.teamStocker.domain.diary.domain.type.Category;
 import com.teamStocker.domain.diary.presentation.dto.request.CreateDiaryRequest;
 import com.teamStocker.domain.diary.presentation.dto.response.DiaryDetailResponse;
 import com.teamStocker.domain.diary.presentation.dto.response.DiaryResponse;
@@ -27,7 +28,6 @@ public class DiaryController {
     }
 
     @Operation(summary = "일기 수정")
-
     @PutMapping("/{id}")
     public void updateDiary(
             @PathVariable Long id,
@@ -52,5 +52,17 @@ public class DiaryController {
     @GetMapping("/{id}")
     public DiaryDetailResponse findDiaryDetail(@PathVariable Long id) {
         return diaryService.findDiaryDetail(id);
+    }
+
+    @Operation(summary = "일기 카테코리 별로 조회하기")
+    @GetMapping("/category")
+    public List<DiaryResponse> findAllDiaryByCategory(@RequestParam Category category) {
+        return diaryService.findAllDiaryByCategory(category);
+    }
+
+    @Operation(summary = "좋아요 가장 많은 일기 3개 조회")
+    @GetMapping("/like")
+    public List<DiaryResponse> findTop3GreatestDiary() {
+        return diaryService.findTop3GreatestDiary();
     }
 }

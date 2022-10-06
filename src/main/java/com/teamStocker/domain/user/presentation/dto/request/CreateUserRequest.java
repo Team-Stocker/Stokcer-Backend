@@ -1,5 +1,6 @@
 package com.teamStocker.domain.user.presentation.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.teamStocker.domain.user.domain.User;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,7 +13,7 @@ public class CreateUserRequest {
     @NotNull(message = "이름을 입력해주세요")
     private String name;
 
-    @NotNull(message = "닉네임을 입력해주세요")
+    @JsonProperty("nick_name")
     private String nickName;
 
     @NotNull(message = "이메일을 입력해주세요")

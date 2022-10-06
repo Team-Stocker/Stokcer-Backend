@@ -24,7 +24,7 @@ public class JwtTokenProvider {
 
     private final RedisService redisService;
 
-    @Value("${jwt.secret}")
+    @Value("${jwt.secret-key}")
     private String SECRET_KEY;
 
     private Key getSigningKey(String secretKey) {
