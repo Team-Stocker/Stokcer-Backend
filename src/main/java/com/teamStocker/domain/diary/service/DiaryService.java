@@ -13,6 +13,7 @@ import com.teamStocker.domain.diary.presentation.dto.response.DiaryResponse;
 import com.teamStocker.domain.user.domain.User;
 import com.teamStocker.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -86,6 +87,26 @@ public class DiaryService {
     @Transactional(readOnly = true)
     public List<DiaryResponse> findTop3GreatestDiary() {
         return diaryRepository.findGreatestDiary().stream()
+                .limit(3)
+                .map(DiaryResponse::of)
+                .collect(Collectors.toList());
+    }
+
+    //repository명.findAll(Sort.by(Sort.Direction.DESC, "기준컬럼명"));
+
+    @Transactional(readOnly = true)
+    public List<DiaryResponse> findTop3RateAsc() {
+        return diaryRepository.findAll(Sort.by(Sort.Direction.ASC, "rate"))
+                .stream()
+                .limit(3)
+                .map(DiaryResponse::of)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<DiaryResponse> findTop3RateDesc() {
+        return diaryRepository.findAll(Sort.by(Sort.Direction.DESC, "rate"))
+                .stream()
                 .limit(3)
                 .map(DiaryResponse::of)
                 .collect(Collectors.toList());
