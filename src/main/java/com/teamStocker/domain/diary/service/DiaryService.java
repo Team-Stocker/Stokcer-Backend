@@ -1,5 +1,8 @@
 package com.teamStocker.domain.diary.service;
 
+import com.teamStocker.domain.comment.domain.Comment;
+import com.teamStocker.domain.comment.domain.repository.CommentRepository;
+import com.teamStocker.domain.comment.presentation.dto.response.CommentResponse;
 import com.teamStocker.domain.diary.domain.Diary;
 import com.teamStocker.domain.diary.domain.repository.DiaryRepository;
 import com.teamStocker.domain.diary.domain.type.Category;
@@ -21,6 +24,7 @@ import java.util.stream.Collectors;
 public class DiaryService {
 
     private final DiaryRepository diaryRepository;
+    private final CommentRepository commentRepository;
     private final UserFacade userFacade;
     private final DiaryFacade diaryFacade;
 
@@ -56,7 +60,20 @@ public class DiaryService {
     @Transactional(readOnly = true)
     public DiaryDetailResponse findDiaryDetail(Long id) {
         Diary diary = diaryFacade.findDiaryById(id);
-        return DiaryDetailResponse.of(diary);
+
+        List<CommentResponse> diaryResponses = commentRepository.findAllByDiary(diary)
+                .stream()
+                .map(this::commentBuilder)
+                .collect(Collectors.toList());
+
+        return DiaryDetailResponse.builder()
+                .title(diary.getTitle())
+                .content(diary.getContent())
+                .category(diary.getCategory())
+                .rate(diary.getRate())
+                .numberOfLikes(diary.getLikes().size())
+                .commentResponseList(diaryResponses)
+                .build();
     }
 
     @Transactional(readOnly = true)
@@ -72,5 +89,13 @@ public class DiaryService {
                 .limit(3)
                 .map(DiaryResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    private CommentResponse commentBuilder(Comment comment) {
+        User user = comment.getUser();
+        return CommentResponse.builder()
+                .nickname(user.getNickName())
+                .content(comment.getContent())
+                .build();
     }
 }
