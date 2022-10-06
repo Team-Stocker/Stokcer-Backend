@@ -10,9 +10,6 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class CreateUserRequest {
 
-    @NotNull(message = "이름을 입력해주세요")
-    private String name;
-
     @JsonProperty("nick_name")
     private String nickName;
 
@@ -24,7 +21,6 @@ public class CreateUserRequest {
 
     public User toEntity(PasswordEncoder passwordEncoder) {
         return User.builder()
-                .name(name)
                 .nickName(nickName)
                 .email(email)
                 .password(passwordEncoder.encode(password))

@@ -25,9 +25,6 @@ public class User extends BaseTimeEntity {
     @Column(name = "profile_img")
     private String profileImg;
 
-    @Column(nullable = false)
-    private String name;
-
     @Column(name = "nick_name", nullable = false)
     private String nickName;
 
@@ -44,9 +41,8 @@ public class User extends BaseTimeEntity {
     private List<Like> likes = new ArrayList<>();
 
     @Builder
-    public User (String profileImg, String name, String nickName, String email, String password) {
+    public User (String profileImg, String nickName, String email, String password) {
         this.profileImg = profileImg;
-        this.name = name;
         this.nickName =  nickName;
         this.email = email;
         this.password = password;
