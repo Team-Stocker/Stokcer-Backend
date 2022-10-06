@@ -2,6 +2,7 @@ package com.teamStocker.domain.diary.service;
 
 import com.teamStocker.domain.diary.domain.Diary;
 import com.teamStocker.domain.diary.domain.repository.DiaryRepository;
+import com.teamStocker.domain.diary.domain.type.Category;
 import com.teamStocker.domain.diary.facade.DiaryFacade;
 import com.teamStocker.domain.diary.presentation.dto.request.CreateDiaryRequest;
 import com.teamStocker.domain.diary.presentation.dto.response.DiaryDetailResponse;
@@ -56,5 +57,12 @@ public class DiaryService {
     public DiaryDetailResponse findDiaryDetail(Long id) {
         Diary diary = diaryFacade.findDiaryById(id);
         return DiaryDetailResponse.of(diary);
+    }
+
+    @Transactional(readOnly = true)
+    public List<DiaryResponse> findAllDiaryByCategory(Category category) {
+        return diaryRepository.findAllByCategory(category).stream()
+                .map(DiaryResponse::of)
+                .collect(Collectors.toList());
     }
 }
