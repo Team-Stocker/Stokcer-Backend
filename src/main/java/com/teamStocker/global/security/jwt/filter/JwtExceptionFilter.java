@@ -18,6 +18,8 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
             chain.doFilter(req, res); // go to 'JwtAuthenticationFilter'
         } catch (BusinessException e) {
             setErrorResponse(res, e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

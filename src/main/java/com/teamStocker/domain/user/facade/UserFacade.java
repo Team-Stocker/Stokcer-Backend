@@ -36,7 +36,7 @@ public class UserFacade {
     }
 
     public User getCurrentUser() {
-        AuthDetails auth = (AuthDetails) SecurityContextHolder.getContext().getAuthentication();
+        AuthDetails auth = (AuthDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return findUserByEmail(auth.getUsername());
     }
 }
