@@ -65,4 +65,16 @@ public class DiaryController {
     public List<DiaryResponse> findTop3GreatestDiary() {
         return diaryService.findTop3GreatestDiary();
     }
+
+    @Operation(summary = "상승 일기 3개 조회")
+    @GetMapping("/asc")
+    public List<DiaryResponse> findTop3RateAsc() {
+        return diaryService.findTop3RateAsc();
+    }
+
+    @Operation(summary = "하락 일기 3개 조회")
+    @GetMapping("/desc")
+    public List<DiaryResponse> findTop3RateDesc() {
+        return diaryService.findTop3RateDesc();
+    }
 }
