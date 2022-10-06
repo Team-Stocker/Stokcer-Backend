@@ -65,4 +65,12 @@ public class DiaryService {
                 .map(DiaryResponse::of)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<DiaryResponse> findTop3GreatestDiary() {
+        return diaryRepository.findGreatestDiary().stream()
+                .limit(3)
+                .map(DiaryResponse::of)
+                .collect(Collectors.toList());
+    }
 }

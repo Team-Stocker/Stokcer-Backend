@@ -59,4 +59,10 @@ public class DiaryController {
     public List<DiaryResponse> findAllDiaryByCategory(@RequestParam Category category) {
         return diaryService.findAllDiaryByCategory(category);
     }
+
+    @Operation(summary = "좋아요 가장 많은 일기 3개 조회")
+    @GetMapping("/like")
+    public List<DiaryResponse> findTop3GreatestDiary() {
+        return diaryService.findTop3GreatestDiary();
+    }
 }
