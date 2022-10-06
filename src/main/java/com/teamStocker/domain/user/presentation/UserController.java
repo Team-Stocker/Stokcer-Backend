@@ -1,5 +1,6 @@
 package com.teamStocker.domain.user.presentation;
 
+import com.teamStocker.domain.diary.presentation.dto.response.DiaryResponse;
 import com.teamStocker.domain.user.presentation.dto.request.CreateUserRequest;
 import com.teamStocker.domain.user.presentation.dto.response.MyPageResponse;
 import com.teamStocker.domain.user.service.UserService;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Tag(name = "유저", description = "유저 관련 API입니다.")
 @RestController
@@ -25,8 +27,14 @@ public class UserController {
     }
 
     @Operation(summary = "마이 페이지")
-    @GetMapping
+    @GetMapping("/profile")
     public MyPageResponse findMyPage() {
         return userService.findMyPage();
+    }
+
+    @Operation(summary = "자신이 쓴 일기 전부 조회")
+    @GetMapping("/dairy")
+    public List<DiaryResponse> findAllMyDiary() {
+        return userService.findAllMyDiary();
     }
 }
